@@ -55,6 +55,8 @@ end
 case env
 when "test"
   DataMapper.setup(:default, "sqlite3::memory:")
+when "development"
+  DataMapper.setup(:default, "mysql://itemboard:#unos1@localhost/itemboard")
 else
   DataMapper.setup(:default, "sqlite3:#{ENV["RACK_ENV"]}.db")
 end
