@@ -228,3 +228,5 @@ class ThingResource < Sinatra::Base
   end
 
 end
+
+require_relative 'board.rb'
