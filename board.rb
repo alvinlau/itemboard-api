@@ -42,15 +42,15 @@ class BoardResource < Sinatra::Base
   put "/board/:id", :provides => :json do
     content_type :json
 
-    new_params = accept_params(params, :name, :status)
+    #new_params = accept_params(params, :name, :status)
 
     if board.valid_id?(params[:id])
       if board = board.first_or_create(:id => params[:id].to_i)
         userid = params[:userid]
         pieceid = params[:pieceid]
-        xy = params[:xy]
-
-        board.attributes = board.attributes.merge(new_params)
+        xystring = params[:xy]
+        xyhash = unpack_xy(xystring)
+        board.attributes = board.attributes.merge(xyhash)
         if board.save
           board.to_json
         else

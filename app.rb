@@ -56,6 +56,7 @@ class Board
   property :cells, String
   property :status, String, :required => true
   property :last_modified, DateTime
+  #belongs_to :user #modified_by
 end
 
 ## set up db
