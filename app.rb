@@ -45,6 +45,19 @@ class Thing
   property :status, String
 end
 
+### Board
+class Board
+  include DataMapper::Resource
+  include StandardProperties
+  extend Validations
+
+  property :name, String
+  property :tags, String
+  property :cells, String
+  property :status, String, :required => true
+  property :last_modified, DateTime
+end
+
 ## set up db
 env = ENV["RACK_ENV"]
 puts "RACK_ENV: #{env}"
@@ -229,4 +242,5 @@ class ThingResource < Sinatra::Base
 
 end
 
+require_relative 'helpers.rb'
 require_relative 'board.rb'
