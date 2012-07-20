@@ -1,2 +1,3 @@
 require './app'
-run ThingResource
+require './board'
+run BoardResource
