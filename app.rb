@@ -16,6 +16,7 @@ require 'dm-timestamps'
 require 'dm-validations'
 
 require_relative 'models.rb'
+require_relative 'helpers.rb'
 
 
 ## logger
@@ -23,8 +24,8 @@ def logger
   @logger ||= Logger.new(STDOUT)
 end
 
-## ThingResource application
-class ThingResource < Sinatra::Base
+## The Application
+class ItemboardApp < Sinatra::Base
   set :methodoverride, true
 
   ## helpers
@@ -184,3 +185,4 @@ class ThingResource < Sinatra::Base
 
 end
 
+require_relative 'board.rb'

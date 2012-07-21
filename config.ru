@@ -1,3 +1,2 @@
 require './app'
-require './board'
-run BoardResource
+run ItemboardApp

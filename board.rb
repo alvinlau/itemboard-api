@@ -17,8 +17,7 @@ def logger
   @logger ||= Logger.new(STDOUT)
 end
 
-## BoardResource
-class BoardResource < Sinatra::Base
+class ItemboardApp < Sinatra::Base
   set :methodoverride, true
 
   def self.put_or_post(*a, &b)
