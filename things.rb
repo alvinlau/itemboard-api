@@ -157,7 +157,6 @@ class ItemboardApp < Sinatra::Base
 
   # misc handlers: error, not_found, etc.
   get "*" do
-    puts "test"
     status 404
   end
 
