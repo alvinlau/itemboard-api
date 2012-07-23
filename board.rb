@@ -12,11 +12,6 @@ require 'dm-validations'
 
 require_relative 'models.rb'
 
-## logger
-def logger
-  @logger ||= Logger.new(STDOUT)
-end
-
 class ItemboardApp < Sinatra::Base
   set :methodoverride, true
 
@@ -70,12 +65,11 @@ class ItemboardApp < Sinatra::Base
     if Board.valid_id?(params[:id])
       if board = Board.first(:id => params[:id].to_i)
         userid = params[:userid]
-        pieceid = params[:pieceid]
-        x = params[:x]
-        y = params[:y]
+        pieceid = params[:pieceid].to_i
+        x = params[:x].to_i
+        y = params[:y].to_i
 
-        cells = board.attributes.cells
-        edit_cell(cells, x, y, pieceid)
+        board.cells = edit_cell(board.cells, x, y, pieceid)
         #board.attributes = board.attributes.merge(new_cells)
         if board.save
           board.to_json
@@ -98,7 +92,7 @@ class ItemboardApp < Sinatra::Base
 
   def edit_cell(cellstring, x, y, pieceid)
     cellarray = cellstring.split(',')
-    cellarray[x+(y-1)*6] = pieceid
+    cellarray[(x-1)+(y-1)*6] = pieceid
     cellstring = cellarray.join(',')
   end
 
