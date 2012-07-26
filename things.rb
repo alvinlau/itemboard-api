@@ -17,6 +17,7 @@ require 'dm-validations'
 
 require_relative 'models.rb'
 require_relative 'helpers.rb'
+#require_relative 'app.rb'
 
 ## The Application
 class ItemboardApp < Sinatra::Base
@@ -154,26 +155,4 @@ class ItemboardApp < Sinatra::Base
       json_status 404, "Not found"
     end
   end
-
-  # misc handlers: error, not_found, etc.
-  get "*" do
-    status 404
-  end
-
-  put_or_post "*" do
-    status 404
-  end
-
-  delete "*" do
-    status 404
-  end
-
-  not_found do
-    json_status 404, "Not found"
-  end
-
-  error do
-    json_status 500, env['sinatra.error'].message
-  end
-
 end
