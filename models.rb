@@ -64,6 +64,7 @@ class BoardSet
   property :name, String
   property :desc, String
   property :reqs, String
+  has n, :board_templates
 end
 
 ### User
@@ -74,6 +75,7 @@ class User
 
   property :name, String
   property :exp, Integer
+  has n, :user_games
 end
 
 ### UserGame
@@ -82,19 +84,41 @@ class UserGame
   include StandardProperties
   extend Validations
 
+  belongs_to :user, :child_key => [:user_id]
+  belongs_to :board, :child_key => [:board_id]
+  belongs_to :piece_set, :child_key => [:piece_set_id]
+  belongs_to :piece, :child_key => [:next_piece_id]
 end
 
 ### Piece
 class Piece
+  include DataMapper::Resource
+  include StandardProperties
+  extend Validations
 
+  property :name, String
+  property :icon_id, Integer
+  belongs_to :piece_set, :child_key => [:set_id]
+  belongs_to :rule, :child_key => [:rule_id]
 end
 
-
 ### PieceSet
+class PieceSet
+  include DataMapper::Resource
+  include StandardProperties
+  extend Validations
 
-### BoardSet
+  property :name, String
+  has n, :pieces
+end
 
-### BoardTemplate
+### Rule
+class Rule
+  include DataMapper::Resource
+  include StandardProperties
+  extend Validations
+
+end
 
 
 ## set up db
