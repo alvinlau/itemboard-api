@@ -41,16 +41,31 @@ class ItemboardApp < Sinatra::Base
   get "/usergame/new/:userid/:boardtempid/:piecesetid", :provides => :json do
     content_type :json
 
-    # check that :id param is an integer
-    if Board.valid_id?(params[:id])
-      if board = Board.first(:id => params[:id].to_i)
-        board.to_json
+    # get the board template
+    if BoardTemplate.valid_id?(params[:boardtempid])
+      if boardtemp = BoardTemplate.first(:id => params[:boardtempid].to_i)
+        # clone the board template into new board
+        board = Board.new
+        board.template_id = params[:boardtempid]
+        unless board.save
+          json_status 400, board.errors.to_hash
+        end
+
+        # create usergame record
+        usergame = UserGame.new
+        usergame.board_id = board[:id]
+        unless usergame.save
+          json_status 400, usergame.errors.to_hash
+        end
+
+        #response object
+        usergame.to_json
       else
-        json_status 404, "Board Not found"
+        json_status 404, "Board template not found"
       end
     else
       # TODO: find better error for this (id not an integer)
-      json_status 404, "Invalid ID"
+      json_status 404, "Invalid board template id"
     end
   end
 

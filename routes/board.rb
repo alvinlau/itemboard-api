@@ -78,7 +78,7 @@ class ItemboardApp < Sinatra::Base
         json_status 404, "Not found"
       end
     else
-      json_status 404, "Not found"
+      json_status 404, "Invalid board id"
     end
   end
 
