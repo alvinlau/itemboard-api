@@ -17,7 +17,6 @@ require 'dm-validations'
 
 require_relative 'models.rb'
 require_relative 'helpers.rb'
-#require_relative 'app.rb'
 
 ## The Application
 class ItemboardApp < Sinatra::Base

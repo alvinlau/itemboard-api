@@ -11,7 +11,7 @@ require 'dm-timestamps'
 require 'dm-validations'
 
 require_relative 'models.rb'
-#require_relative 'app.rb'
+require_relative 'helpers.rb'
 
 class ItemboardApp < Sinatra::Base
   set :methodoverride, true
