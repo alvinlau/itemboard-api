@@ -38,8 +38,32 @@ class Board
   property :tags, String
   property :cells, String
   property :status, String, :required => true
+  property :meta, String
   #property :last_modified, DateTime
   belongs_to :user, :child_key => [:modified_by]
+  belongs_to :board_template, :child_key => [:template_id]
+end
+
+### BoardTemplate
+class BoardTemplate
+  include DataMapper::Resource
+  include StandardProperties
+  extend Validations
+
+  property :name, String
+  property :cells, String
+  belongs_to :board_set, :child_key => [:set_id]
+end
+
+### BoardSet
+class BoardSet
+  include DataMapper::Resource
+  include StandardProperties
+  extend Validations
+
+  property :name, String
+  property :desc, String
+  property :reqs, String
 end
 
 ### User

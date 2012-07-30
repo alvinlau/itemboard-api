@@ -18,9 +18,9 @@ end
 
 require_relative 'models.rb'
 require_relative 'helpers.rb'
-
-require_relative 'board.rb'
-require_relative 'things.rb'
+require_relative 'routes/things.rb'
+require_relative 'routes/board.rb'
+require_relative 'routes/user.rb'
 
 class ItemboardApp < Sinatra::Base
   set :methodoverride, true
