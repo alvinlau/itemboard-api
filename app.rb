@@ -21,6 +21,7 @@ require_relative 'helpers.rb'
 require_relative 'routes/things.rb'
 require_relative 'routes/board.rb'
 require_relative 'routes/user.rb'
+require_relative 'routes/usergame.rb'
 
 class ItemboardApp < Sinatra::Base
   set :methodoverride, true

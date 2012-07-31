@@ -37,7 +37,8 @@ class ItemboardApp < Sinatra::Base
     end
   end
 
-  ## GET /board/:id - create a new game by cloning a board template
+  ## GET /usergame/new/:userid/:boardtempid/:piecesetid
+  ## create a new game by cloning a board template
   get "/usergame/new/:userid/:boardtempid/:piecesetid", :provides => :json do
     content_type :json
 
@@ -68,5 +69,22 @@ class ItemboardApp < Sinatra::Base
       json_status 404, "Invalid board template id"
     end
   end
+
+  ## GET /usergame/:userid
+  ## get a user's list of games
+  get "/usergame/:userid", :provides => :json do
+    content_type :json
+
+    if User.valid_id?(params[:userid])
+      if usergames = UserGame.all(:user_id => params[:userid])
+        usergames.to_json
+      else
+        json_status 204, "User has no games"
+      end
+    else
+      json_status 404, "Invalid user id"
+    end
+
+  end  
 
 end
